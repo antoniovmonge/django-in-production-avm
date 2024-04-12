@@ -4,10 +4,18 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+
 # Create your views here.
 def health_check(request, *args, **kwargs):
     return HttpResponse("Healthy | Demo App")
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 def health_check_drf(request, *args, **kwargs):
     return Response(data={"msg": "Healthy | DRF"})
+
+
+@api_view(["GET"])
+def demo_version(request, *args, **kwargs):
+    version = request.version
+    return Response(data={"msg": f"You have hit {version} of demo-api"})
